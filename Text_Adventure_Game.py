@@ -1,3 +1,8 @@
+"""Name: Text_Adventure_Game
+   Author: Elizaveta Maliugina
+   Purpose: Project 1 for CSCI 1511
+   Date: 9/22/2026 """
+
 name = str(input("Welcome! Enter your name:  "))
 
 print()
@@ -15,6 +20,8 @@ def are_you_sure():
     #Add later
     print("'are_you_sure' not added yet")
     pass
+
+print()
 
 if path_choosen != 1 or path_choosen != 2 or path_choosen != 3:
     are_you_sure()
