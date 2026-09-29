@@ -28,7 +28,7 @@ def are_you_sure(current_path):
         return new_value
 
 def summary():
-    """Prints a summary of the game, can also end game if fail = 1"""
+    """Prints a summary and ends the game"""
     #Add later
     print(f"\nWill later print a summary of the game")
     sys.exit()
@@ -48,10 +48,9 @@ while True:
         if path_chosen not in [1,2,3]:
             path_chosen = are_you_sure(path_chosen)
             limiter += 1
-        if limiter == 3:
+        if limiter == 2:
             print(f"\nDue to your indecisiveness...")
-            fail = 1
-        if fail == 1:
+            print(random.choice(fail_scenarios))
             summary()
             break
     except ValueError:
@@ -79,14 +78,13 @@ while path_chosen == 1:
         if path_1 not in [1,2,3]:
             path_1 = are_you_sure(path_1)
             limiter += 1
-        if limiter == 3:
+        if limiter == 2:
             print(f"\nDue to your indecisiveness...")
-            fail = 1
-        if fail == 1:
+            print(random.choice(fail_scenarios))
             summary()
     except ValueError:
         print(f"\nInvalid input. Please enter a number (1, 2, or 3):  ")
-    if type(path_1) == int:
+    if type(path_1) == int and (path_1 in [1,2,3]):
         print(f"\nLoop 2 Complete - Remove/Replace later")
         if path_1 == 1:
             print(path_1_endings[1])
@@ -115,14 +113,13 @@ while path_chosen == 2:
         if path_2 not in [1,2]:
             path_2 = are_you_sure(path_2)
             limiter += 1
-        if limiter == 3:
+        if limiter == 2:
             print(f"\nDue to your indecisiveness...")
-            fail = 1
-        if fail == 1:
+            print(random.choice(fail_scenarios))
             summary()
     except ValueError:
         print(f"\nInvalid input. Please enter a number (1 or 2):  ")
-    if type(path_2) == int:
+    if type(path_2) == int and (path_2 in [1,2]):
         print(f"\nLoop 3 Complete - Remove/Replace later")
         if path_2 == 1:
             print(path_2_endings[1])
@@ -136,22 +133,24 @@ while path_chosen == 2:
 
 #Path 3 Route    
 
-path_3_endings = {1:"Something1", 2: "Something2", 3: "Something3"}  
+path_3_endings = {1:f"\nYou pick up the items and put them on. You continue walking along the cliff but soon notice that the animals no longer react to your presence. You keep walking and see a camp with a waving flag and soldiers guarding what seems to be a sort of treasure. After some patient waiting and a perfect moment, you make your way out with the treasure, hearing a commotion beginning in the distance behind you.",
+                2: "Climbing down the rope, almost falling and slipping down rocks, you arrive at the entrance of cave on the beach. You enter and begin to hear strange whispers. Eventually, you reach a part of the cave that has a hole for sunlight where you find some creatures having a hushed discussion. They scramble away as they notice you, leaving behind a shiny shell. Just as you pick it up, the cave starts shaking. You barely make it out as the cave collapses behind you and you decide to continue walking and exploring the beach."}  
 
 while path_chosen == 3:
     try:
-        path_3 = int(input("Placeholder"))
-        if path_3 not in [1,2,3]:
+        path_3 = int(input(f"\nYou proceed around the woods and enter a field leading to a cliffside. There is a herd of wild ungulates grazing and various birds sitting in the trees and on the cliff's edge. "
+                           "You walk up to the cliff edge and find some items such as a cloak, dagger, and bag with coins in the tall grass. You also see a rope going down the cliff."
+                           "\n\nChoose an option, 1 for picking up the items and 2 for climbing down the rope:  "))
+        if path_3 not in [1,2]:
             path_3 = are_you_sure(path_3)
             limiter += 1
-        if limiter == 3:
+        if limiter == 2:
             print(f"\nDue to your indecisiveness...")
-            fail = 1
-        if fail == 1:
+            print(random.choice(fail_scenarios))
             summary()
     except ValueError:
         print(f"\nInvalid input. Please enter a number (1, 2, or 3):  ")
-    if type(path_3) == int:
+    if type(path_3) == int and (path_3 in [1,2]):
         print(f"\nLoop 4 Complete - Remove/Replace later")
         break
     else:
