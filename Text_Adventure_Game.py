@@ -4,7 +4,7 @@
    Date: 9/30/2026
    Resources: None"""
 
-name = str(input("Welcome! Enter your name:  "))
+name = str(input("\nWelcome! Enter your name:  "))
 
 print(f"\nYou arrive at the edge of a forest.")
 
@@ -33,7 +33,7 @@ def summary():
     if marker == 000:
         print("Only got to the forest enterance before indecisiveness caught up.")
     elif marker == 111:
-        print("Chose the first of many paths, most of which remain unknown due to indecisiveness.")
+        print("Chose the first of many paths into the woods, most of which remain unknown due to indecisiveness.")
     elif marker == 11:
         print("Chose to go into the woods, discovering the ruins and finding the treasures inside.")
     elif marker == 12:
@@ -79,8 +79,8 @@ while True:
             break
     except ValueError:
         print("\nInvalid input. Please enter a number (1, 2, or 3).")
+        limiter += 1
     if type(path_chosen) == int and (path_chosen in [1,2,3]):
-        print(f"\nLoop 1 Complete - Remove/Replace later")
         break
     else:
         continue
@@ -95,7 +95,7 @@ path_1_endings = {1:f"\nYou explore the ruins and as the sun begins setting, the
 while path_chosen == 1:
     try:
         path_1 = int(input(f"\nYou walk directly into the woods. You continue for what seems like forever until you arrive at some mysteryous ruins, their faint glow seems to pull you towards them."
-                        "Out of the corner of your eye, you something move in the forest. The path continues to the side of the ruins."
+                        " Out of the corner of your eye, you something move in the forest. The path continues to the side of the ruins."
                         "\n\nChoose a path: 1, 2 or 3:  "))
         if path_1 not in [1,2,3]:
             path_1 = are_you_sure(path_1)
@@ -107,8 +107,8 @@ while path_chosen == 1:
             summary()
     except ValueError:
         print(f"\nInvalid input. Please enter a number (1, 2, or 3):  ")
+        limiter += 1
     if type(path_1) == int and (path_1 in [1,2,3]):
-        print(f"\nLoop 2 Complete - Remove/Replace later")
         if path_1 == 1:
             print(path_1_endings[1])
             marker = 11
@@ -146,8 +146,8 @@ while path_chosen == 2:
             summary()
     except ValueError:
         print(f"\nInvalid input. Please enter a number (1 or 2):  ")
+        limiter += 1
     if type(path_2) == int and (path_2 in [1,2]):
-        print(f"\nLoop 3 Complete - Remove/Replace later")
         if path_2 == 1:
             print(path_2_endings[1])
             marker = 21
@@ -180,8 +180,8 @@ while path_chosen == 3:
             summary()
     except ValueError:
         print(f"\nInvalid input. Please enter a number (1 or 2)  ")
+        limiter += 1
     if type(path_3) == int and (path_3 in [1,2]):
-        print(f"\nLoop 4 Complete - Remove/Replace later")
         if path_3 == 1:
             print(path_3_endings[1])
             marker = 31
