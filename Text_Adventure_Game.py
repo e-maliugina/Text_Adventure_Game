@@ -1,7 +1,8 @@
 """Name: Text_Adventure_Game
    Author: Elizaveta Maliugina
    Purpose: Project 1 for CSCI 1511
-   Date: 9/27/2026 """
+   Date: 9/30/2026
+   Resources: None"""
 
 name = str(input("Welcome! Enter your name:  "))
 
@@ -11,8 +12,6 @@ import random
 
 import sys
 
-fail = 0
-
 def are_you_sure(current_path):
     """ Active after the user enters an incorrect form of input, asking for confirmation.
     If the incorrect input is validated, the function trips a randomized event and the game ends.
@@ -20,7 +19,7 @@ def are_you_sure(current_path):
 
     confirmation = input(f"\nAre you sure about your answer? Yes or No  ")
 
-    if confirmation.lower in ["yes", "y"]:
+    if confirmation.strip().lower() in ["yes", "y"]:
         print(random.choice(fail_scenarios))
         summary()
     else:
@@ -29,15 +28,39 @@ def are_you_sure(current_path):
 
 def summary():
     """Prints a summary and ends the game"""
-    #Add later
-    print(f"\nWill later print a summary of the game")
+    print("\n---  Game Summary  ---")
+    print(f"Player Name: {name}")
+    if marker == 000:
+        print("Only got to the forest enterance before indecisiveness caught up.")
+    elif marker == 111:
+        print("Chose the first of many paths, most of which remain unknown due to indecisiveness.")
+    elif marker == 11:
+        print("Chose to go into the woods, discovering the ruins and finding the treasures inside.")
+    elif marker == 12:
+        print("Chose to go into the woods, discovering the ruins, but decided to try and catch up to the entity in the background. Losing sight of the creature, you get stranded in the woods with darkness aproaching.")
+    elif marker == 13:
+        print("Chose to go into the woods, discovering the ruins, but decided to continue following the path and reaching the wishing tree.")
+    elif marker == 222:
+        print("Chose to go to the hut, but indecisiveness over the tea led you to a dead end.")
+    elif marker == 21:
+        print("Chose to go to the hut and accept Beatrice's tea and help, getting a full night's rest and some helpful advice.")
+    elif marker == 22:
+        print("Chose to go to the hut, but declined Beatrice's offer of tea, leading to you possibly missing out on something interesting.")
+    elif marker == 333:
+        print("Chose to go around the woods and into the cliff field, but indecisiveness led to your peril.")
+    elif marker == 31:
+        print("Chose to go around the woods into the cliff field and pick up the cloak and other items, letting you get another interesting item.")
+    elif marker == 32:
+        print("Chose to go around the woods into the cliff field and do down the frayed rope to discover a cave, where some critters were speaking. Once discovered they left a shell that you collected while avoiding a collapse, continuing your exploration.")
     sys.exit()
 
-fail_scenarios = [f"\nYou walk forward, intending to step through a pile of leaves, but instead, you fall straight though them into a bottomless pit.",
+fail_scenarios = [f"\nYou walk out forward, intending to step through a pile of leaves, but instead, you fall straight though them into a bottomless pit.",
                 f"\nYou hear a whistling sound quickly getting lowder and closer, as you look around, you barely have time to see the object as it lands next to you and *BOOM*",
                 f"\nYou hear distantly approaching howls, and are then devoured by a pack of wolves."]
 
 limiter = 0
+
+marker = 0
 
 while True:
     try:
@@ -51,6 +74,7 @@ while True:
         if limiter == 2:
             print(f"\nDue to your indecisiveness...")
             print(random.choice(fail_scenarios))
+            marker = 000
             summary()
             break
     except ValueError:
@@ -62,8 +86,6 @@ while True:
         continue
 
 #Path 1 Route
-
-marker = 0 #Add to each later to personalize summary
 
 path_1_endings = {1:f"\nYou explore the ruins and as the sun begins setting, their glow becomes clearer. You find an unlocked chest with a symbol on the front and open it to find the riches of your dreams.",\
                 2: f"\nYou try to follow whatever is moving, but it soon outruns you and you find yourself lost as the sun sets.",\
@@ -81,6 +103,7 @@ while path_chosen == 1:
         if limiter == 2:
             print(f"\nDue to your indecisiveness...")
             print(random.choice(fail_scenarios))
+            marker = 111
             summary()
     except ValueError:
         print(f"\nInvalid input. Please enter a number (1, 2, or 3):  ")
@@ -88,12 +111,15 @@ while path_chosen == 1:
         print(f"\nLoop 2 Complete - Remove/Replace later")
         if path_1 == 1:
             print(path_1_endings[1])
+            marker = 11
             summary()
         elif path_1 == 2:
             print(path_1_endings[2])
+            marker = 12
             summary()
         elif path_1 == 3:
             print(path_1_endings[3])
+            marker = 13
             summary()
         break
     else:
@@ -109,13 +135,14 @@ while path_chosen == 2:
         path_2 = int(input(f"\nAs you slowly appreach the hut, you hear humming comming from within. You knock on the door and an old woman answers."
                            "'Come in,' she says, 'Let's have some tea and you can tell me about your travels.' You go in and inspect the hut; you see various herbs hung among humble interior"
                             "and a cauldron bubbling in the corner over the fire. You sit down at the table in the corner and the old lady offers you the tea, do you drink it?"
-                            "\n\nChoose an option, 1 to accept and 2 to decline:  "))
+                            "\n\nChoose an option: 1 to accept and 2 to decline:  "))
         if path_2 not in [1,2]:
             path_2 = are_you_sure(path_2)
             limiter += 1
         if limiter == 2:
             print(f"\nDue to your indecisiveness...")
             print(random.choice(fail_scenarios))
+            marker = 222
             summary()
     except ValueError:
         print(f"\nInvalid input. Please enter a number (1 or 2):  ")
@@ -123,9 +150,11 @@ while path_chosen == 2:
         print(f"\nLoop 3 Complete - Remove/Replace later")
         if path_2 == 1:
             print(path_2_endings[1])
+            marker = 21
             summary()
         elif path_2 == 2:
             print(path_2_endings[2])
+            marker = 22
             summary()
         break
     else:
@@ -147,11 +176,20 @@ while path_chosen == 3:
         if limiter == 2:
             print(f"\nDue to your indecisiveness...")
             print(random.choice(fail_scenarios))
+            marker = 333
             summary()
     except ValueError:
-        print(f"\nInvalid input. Please enter a number (1, 2, or 3):  ")
+        print(f"\nInvalid input. Please enter a number (1 or 2)  ")
     if type(path_3) == int and (path_3 in [1,2]):
         print(f"\nLoop 4 Complete - Remove/Replace later")
+        if path_3 == 1:
+            print(path_3_endings[1])
+            marker = 31
+            summary()
+        elif path_3 == 2:
+            print(path_3_endings[2])
+            marker = 32
+            summary()
         break
     else:
         continue
